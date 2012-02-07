@@ -31,7 +31,7 @@ import java.util.Iterator;
  */
 public class RapidMinerTest {
     
-    static final String projectPWD = "C:\\Users\\Zis\\Desktop\\FEL\\Diplomka\\RapidMiner\\RapidMinerTest\\";
+    static final String projectPWD = "C:\\Users\\Zis\\Desktop\\FEL\\Diplomka\\RapidMiner\\RapidMinerTestAPI\\5.1\\RapidMinerTest\\";
         /**
 	 * @param args
 	 */
@@ -92,7 +92,7 @@ public class RapidMinerTest {
 			
 			
 			
-			
+                        System.out.println(process.getRootOperator().createProcessTree(0));
 			
 			process.run();
 			
