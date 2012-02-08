@@ -1,6 +1,6 @@
-Feb 8, 2012 4:30:05 PM com.rapidminer.tools.WrapperLoggingHandler log
+Feb 8, 2012 5:23:37 PM com.rapidminer.tools.WrapperLoggingHandler log
 INFO: No filename given for result file, using stdout for logging results!
-Feb 8, 2012 4:30:05 PM com.rapidminer.Process run
+Feb 8, 2012 5:23:37 PM com.rapidminer.Process run
 INFO: Process C:\Users\Zis\Desktop\FEL\Diplomka\RapidMiner\RapidMinerTestAPI\5.1\RapidMinerTest\aggregation.xml starts
-Feb 8, 2012 4:30:05 PM com.rapidminer.Process run
+Feb 8, 2012 5:23:37 PM com.rapidminer.Process run
 INFO: Process C:\Users\Zis\Desktop\FEL\Diplomka\RapidMiner\RapidMinerTestAPI\5.1\RapidMinerTest\aggregation.xml finished successfully after 0 s

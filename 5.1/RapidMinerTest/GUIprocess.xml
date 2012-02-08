@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process version="5.1.014">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="5.0.000" expanded="true" name="Root">
+    <description>&lt;p&gt;This process demonstrates how a threshold can be obtained from a soft classifier and applied to an independent test set.&lt;/p&gt;&lt;ol&gt;&lt;li&gt;The learner used in this process makes soft predictions instead of crisp classifications.  The prediction confidences delivered by all learners in RapidMiner which are able to handle nominal labels (classification) will be used as soft predictions. &lt;br&gt;&lt;icon&gt;groups/24/learner&lt;/icon&gt;&lt;/li&gt;&lt;li&gt;The ThresholdFinder is used to determine the best threshold with respect to class weights. In this case, a wrong classification of the first class (negative) will cause costs five times bigger than the other error. &lt;br&gt;&lt;icon&gt;groups/24/postprocessing&lt;/icon&gt;&lt;/li&gt;&lt;li&gt;Please note that a ModelApplier must be performed on the test set before a threshold can be found. Since this model must be applied again later, the model applier keeps the input model. &lt;br&gt;&lt;icon&gt;operators/24/model_applier&lt;/icon&gt;&lt;/li&gt;&lt;li&gt;The IOConsumer ensures that the prediction is made on the correct data set.  &lt;br&gt;&lt;icon&gt;operators/24/io_consumer&lt;/icon&gt;&lt;/li&gt;&lt;li&gt;The last steps apply the model and the threshold on the data set at hand. &lt;br&gt;&lt;icon&gt;groups/24/validation&lt;/icon&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+    <parameter key="logverbosity" value="status"/>
+    <parameter key="random_seed" value="1903"/>
+    <parameter key="send_mail" value="1"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <parameter key="parallelize_main_process" value="false"/>
+    <process expanded="true" height="584" width="918">
+      <operator activated="true" class="read_csv" compatibility="5.1.014" expanded="true" height="60" name="Read CSV" width="90" x="107" y="109">
+        <parameter key="csv_file" value="C:\Users\Zis\Desktop\FEL\Diplomka\RapidMiner\RapidMinerTestAPI\5.1\RapidMinerTest\report1.csv"/>
+        <parameter key="column_separators" value=";"/>
+        <parameter key="trim_lines" value="false"/>
+        <parameter key="use_quotes" value="true"/>
+        <parameter key="quotes_character" value="&quot;"/>
+        <parameter key="escape_character_for_quotes" value="\"/>
+        <parameter key="skip_comments" value="false"/>
+        <parameter key="comment_characters" value="#"/>
+        <parameter key="parse_numbers" value="true"/>
+        <parameter key="decimal_character" value="."/>
+        <parameter key="grouped_digits" value="false"/>
+        <parameter key="grouping_character" value=","/>
+        <parameter key="date_format" value=""/>
+        <parameter key="first_row_as_names" value="false"/>
+        <list key="annotations">
+          <parameter key="0" value="Name"/>
+        </list>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="encoding" value="windows-1250"/>
+        <list key="data_set_meta_data_information">
+          <parameter key="0" value="name.true.polynominal.attribute"/>
+          <parameter key="1" value="number.true.integer.attribute"/>
+          <parameter key="2" value="nick.true.binominal.attribute"/>
+        </list>
+        <parameter key="read_not_matching_values_as_missings" value="true"/>
+        <parameter key="datamanagement" value="double_array"/>
+      </operator>
+      <operator activated="true" class="aggregate" compatibility="5.1.014" expanded="true" height="76" name="Aggregate" width="90" x="313" y="120">
+        <parameter key="use_default_aggregation" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_aggregation_function" value="average"/>
+        <list key="aggregation_attributes">
+          <parameter key="number" value="sum"/>
+        </list>
+        <parameter key="group_by_attributes" value="|nick"/>
+        <parameter key="count_all_combinations" value="false"/>
+        <parameter key="only_distinct" value="false"/>
+        <parameter key="ignore_missings" value="true"/>
+      </operator>
+      <connect from_op="Read CSV" from_port="output" to_op="Aggregate" to_port="example set input"/>
+      <connect from_op="Aggregate" from_port="example set output" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="144"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

@@ -3,24 +3,48 @@
     <parameter key="logfile" value="processlog.log"/>
     
     <operator name="CSVReader" class="CSVExampleSource">
-        <parameter key="csv_file" value="report1.csv"/>
+        <parameter key="csv_file" value="report.csv"/>
         <parameter key="column_separators" value=";"/>
         <parameter key="trim_lines" value="true"/>
+        
+        <list key="data_set_meta_data_information">
+          <parameter key="0" value="experimentID.true.binominal.attribute"/>
+          <parameter key="1" value="problemID.true.binominal.attribute"/>
+          <parameter key="2" value="algorithmID.true.binominal.attribute"/>
+          <parameter key="3" value="instanceID.true.polynominal.attribute"/>
+          <parameter key="4" value="configID.true.polynominal.attribute"/>
+          <parameter key="5" value="value.true.real.attribute"/>
+        </list>
+
     </operator>
     
     <operator name="Aggregation" class="Aggregation">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="default_aggregation_function" value="average"/>
-        <parameter key="attribute_filter_type" value="all"/>        
+        <parameter key="trim_lines" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        
+        <!--
+            Definovane sloupce podle kterych se budou provadet dane agregace.
+            Jako KEY - lze uvest nazev sloupce (definovane prvnim radkem v CSV)
+        -->
         <list key="aggregation_attributes">
-          <parameter key="number" value="sum"/>
+          <parameter key="value" value="average"/>
         </list>
-        <!--<parameter key="group_by_attributes" value="|nick"/>-->
+        
+        <parameter key="group_by_attributes" value="|instanceID|configID"/>
+        <!--<parameter key="group_by_attributes" value="instanceID||configID"/>-->
     </operator>
     
     <operator name="CSVWriter" class="CSVExampleSetWriter">
         <parameter key="csv_file" value="report_OUT.csv"/>
         <parameter key="column_separators" value=";"/>
-    </operator>    
+    </operator>
+    
+    
+    <!--
+      <connect from_op="Read CSV" from_port="output" to_op="Aggregate" to_port="example set input"/>
+      <connect from_op="Aggregate" from_port="example set output" to_port="result 1"/>
+    -->
     
 </operator>
