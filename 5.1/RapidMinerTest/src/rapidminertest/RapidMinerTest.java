@@ -22,7 +22,9 @@ import com.rapidminer.operator.ports.OutputPort;
 import com.rapidminer.operator.ports.OutputPorts;
 import com.rapidminer.operator.preprocessing.transformation.aggregation.AggregationOperator;
 import com.rapidminer.parameter.Parameters;
+import com.rapidminer.tools.XMLException;
 import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 
 /**
@@ -35,7 +37,7 @@ public class RapidMinerTest {
         /**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, XMLException {
 //		String rapidMinerHome = "/usr/local/rapidminer";
 //		System.setProperty("rapidminer.home", rapidMinerHome);
 		RapidMiner.setExecutionMode(RapidMiner.ExecutionMode.COMMAND_LINE);
@@ -43,31 +45,32 @@ public class RapidMinerTest {
 		
 		try {
 			/* Reading Data */
-			Operator trainingDataReader = OperatorService.createOperator(CSVExampleSource.class);
-			trainingDataReader.setParameter("csv_file", RapidMinerTest.projectPWD + "report1.csv"); 
-                        trainingDataReader.setParameter("column_separators", ";");
-                        
-                        //IOContainer c = trainingDataReader.app
-			
-			/* Classifier */
-			Operator aggregation = OperatorService.createOperator(AggregationOperator.class);
-                        //aggregation.setParameter("keep_example_set", "true");
-                        //aggregation.setParameter("aggregation_attributes", "sum");
-                        aggregation.setParameter("use_default_aggregation", "sum name");
-                        
-                        //aggregation.execute();
-                        
-                        
-                        Parameters par = aggregation.getParameters();
-                        
-                        for(String p : par.getKeys())
-                            System.out.println("- " + p);
-                        
-                        OutputPorts in = aggregation.getOutputPorts();
-                        for( OutputPort p : in.getAllPorts() )
-                        {
-                            System.out.println(p.getName());
-                        }
+//			Operator trainingDataReader = OperatorService.createOperator(CSVExampleSource.class);
+//			trainingDataReader.setParameter("csv_file", RapidMinerTest.projectPWD + "report1.csv"); 
+//                        trainingDataReader.setParameter("column_separators", ";");
+//                        
+//                        //IOContainer c = trainingDataReader.app
+//			
+//			/* Classifier */
+//			Operator aggregation = OperatorService.createOperator(AggregationOperator.class);
+//                        //aggregation.setParameter("keep_example_set", "true");
+//                        //aggregation.setParameter("aggregation_attributes", "sum");
+//                        aggregation.setParameter("aggregation_function", "sum");
+//                        aggregation.setParameter("aggregation_name", "number");
+//                        
+//                        //aggregation.execute();
+//                        
+//                        
+//                        Parameters par = aggregation.getParameters();
+//                        
+//                        for(String p : par.getKeys())
+//                            System.out.println("- " + p);
+//                        
+//                        OutputPorts in = aggregation.getOutputPorts();
+//                        for( OutputPort p : in.getAllPorts() )
+//                        {
+//                            System.out.println(p.getName());
+//                        }
                             
 			
                         
@@ -75,14 +78,15 @@ public class RapidMinerTest {
 //			Operator modelWriter = OperatorService.createOperator(ModelWriter.class);
 //			modelWriter.setParameter("model_file", "t.txt");
                         
-                        Operator csvWriter = OperatorService.createOperator(CSVExampleSetWriter.class);  
-                        csvWriter.setParameter("csv_file", RapidMinerTest.projectPWD + "report_OUT.csv");  
-                        csvWriter.setParameter("column_separator", ";");
+//                        Operator csvWriter = OperatorService.createOperator(CSVExampleSetWriter.class);  
+//                        csvWriter.setParameter("csv_file", RapidMinerTest.projectPWD + "report_OUT.csv");  
+//                        csvWriter.setParameter("column_separator", ";");
 			
-			Process process = new Process();
+                        
+			Process process = new Process(new File(RapidMinerTest.projectPWD + "aggregation.xml"));
                         
 			
-			process.getRootOperator().getSubprocess(0).addOperator(trainingDataReader);
+			/*process.getRootOperator().getSubprocess(0).addOperator(trainingDataReader);
 			process.getRootOperator().getSubprocess(0).addOperator(aggregation);
 			process.getRootOperator().getSubprocess(0).addOperator(csvWriter);
                       
@@ -90,7 +94,7 @@ public class RapidMinerTest {
                        aggregation.getOutputPorts().getPortByName("original").connectTo(csvWriter.getInputPorts().getPortByName("input"));
 
 			
-			
+			/**/
 			
                         System.out.println(process.getRootOperator().createProcessTree(0));
 			
@@ -99,10 +103,12 @@ public class RapidMinerTest {
 
 			
 			
-		} catch (OperatorCreationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (OperatorException e) {
+		}
+//                catch (OperatorCreationException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
+                catch (OperatorException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 

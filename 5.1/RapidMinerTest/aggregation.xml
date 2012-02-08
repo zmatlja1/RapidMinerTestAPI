@@ -1,0 +1,26 @@
+<operator name="Global" class="Process">
+    
+    <parameter key="logfile" value="processlog.log"/>
+    
+    <operator name="CSVReader" class="CSVExampleSource">
+        <parameter key="csv_file" value="report1.csv"/>
+        <parameter key="column_separators" value=";"/>
+        <parameter key="trim_lines" value="true"/>
+    </operator>
+    
+    <operator name="Aggregation" class="Aggregation">
+        <parameter key="use_default_aggregation" value="false"/>
+        <parameter key="default_aggregation_function" value="average"/>
+        <parameter key="attribute_filter_type" value="all"/>        
+        <list key="aggregation_attributes">
+          <parameter key="number" value="sum"/>
+        </list>
+        <!--<parameter key="group_by_attributes" value="|nick"/>-->
+    </operator>
+    
+    <operator name="CSVWriter" class="CSVExampleSetWriter">
+        <parameter key="csv_file" value="report_OUT.csv"/>
+        <parameter key="column_separators" value=";"/>
+    </operator>    
+    
+</operator>
