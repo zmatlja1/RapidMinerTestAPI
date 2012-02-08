@@ -33,7 +33,7 @@ import java.util.Iterator;
  */
 public class RapidMinerTest {
     
-    static final String projectPWD = "C:\\Users\\Zis\\Desktop\\FEL\\Diplomka\\RapidMiner\\RapidMinerTestAPI\\5.1\\RapidMinerTest\\";
+    //static final String projectPWD = "C:\\Users\\Zis\\Desktop\\FEL\\Diplomka\\RapidMiner\\RapidMinerTestAPI\\5.1\\RapidMinerTest\\";
         /**
 	 * @param args
 	 */
@@ -83,7 +83,7 @@ public class RapidMinerTest {
 //                        csvWriter.setParameter("column_separator", ";");
 			
                         
-			Process process = new Process(new File(RapidMinerTest.projectPWD + "aggregation.xml"));
+			Process process = new Process(new File("aggregation.xml"));
                         
 			
 			/*process.getRootOperator().getSubprocess(0).addOperator(trainingDataReader);
