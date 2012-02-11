@@ -5,6 +5,7 @@ import com.rapidminer.tools.OperatorService;
 import com.rapidminer.RapidMiner;
 import com.rapidminer.example.ExampleSet;
 import com.rapidminer.Process;
+import com.rapidminer.datatable.DataTable;
 import com.rapidminer.gui.tools.dialogs.wizards.dataimport.csv.CSVFileReader;
 import com.rapidminer.operator.IOContainer;
 import com.rapidminer.operator.Operator;
@@ -25,7 +26,9 @@ import com.rapidminer.parameter.Parameters;
 import com.rapidminer.tools.XMLException;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -93,12 +96,27 @@ public class RapidMinerTest {
                        trainingDataReader.getOutputPorts().getPortByName("output").connectTo(aggregation.getInputPorts().getPortByName("example set input"));
                        aggregation.getOutputPorts().getPortByName("original").connectTo(csvWriter.getInputPorts().getPortByName("input"));
 
-			
-			/**/
+                        /**/
 			
                         System.out.println(process.getRootOperator().createProcessTree(0));
+                        
+                        process.run();
+                        
+                        Collection<Operator> ops = process.getAllOperators();
+                        ExampleSet ex = null;
+                        
+                        for(Operator op : ops)
+                        {
+                            System.out.println(op.getName());
+                            if(op.getName().equals("Aggregate (2)"))
+                                ex = op.getOutputPorts().getPortByName("example set output").getData();
+                        }
+
+                        
+                        System.out.println(ex);
+                        
 			
-			process.run();
+			
 			
 
 			

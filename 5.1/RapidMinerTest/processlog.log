@@ -1,6 +1,4 @@
-Feb 8, 2012 5:52:49 PM com.rapidminer.tools.WrapperLoggingHandler log
+Feb 11, 2012 5:25:55 PM com.rapidminer.tools.WrapperLoggingHandler log
 INFO: No filename given for result file, using stdout for logging results!
-Feb 8, 2012 5:52:49 PM com.rapidminer.Process run
+Feb 11, 2012 5:25:55 PM com.rapidminer.Process run
 INFO: Process aggregation.xml starts
-Feb 8, 2012 5:52:49 PM com.rapidminer.Process run
-INFO: Process aggregation.xml finished successfully after 0 s
